@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "description": "Task 1",
+        "status": "mark-in-progress",
+        "createdAt": "25/01/2025",
+        "updatedAt": null
+    },
+    {
+        "id": 2,
+        "description": "Task 2: updated",
+        "status": "todo",
+        "createdAt": "25/01/2025",
+        "updatedAt": "25/01/2025"
+    },
+    {
+        "id": 3,
+        "description": "Task 3",
+        "status": "mark-done",
+        "createdAt": "25/01/2025",
+        "updatedAt": null
+    },
+    {
+        "id": 4,
+        "description": "Task 4",
+        "status": "todo",
+        "createdAt": "25/01/2025",
+        "updatedAt": null
+    }
+]

@@ -2,7 +2,7 @@ import argparse
 from datetime import datetime
 import json
 
-Actions = ['add', 'update', 'remove']
+Actions = ['add', 'update', 'remove', 'mark-done', 'mark-in-progress']
 TASK_STATUS = ['todo', 'in-progress', 'done']
 added_tasks = 0
 
@@ -50,6 +50,14 @@ parser_update.add_argument('description', type=str, help='Updated task descripti
 parser_update = subparsers.add_parser('remove', help='Remove task')
 parser_update.add_argument('id', type=int, help='Task to remove id')
 
+# Mark as done task Sub Command
+parser_update = subparsers.add_parser('mark-done', help='Mark task as done')
+parser_update.add_argument('id', type=int, help='Task to mark as done id')
+
+# Mark in progress task Sub Command
+parser_update = subparsers.add_parser('mark-in-progress', help='Mark task in progress')
+parser_update.add_argument('id', type=int, help='Task to mark as in progress id')
+
 
 command = parser.parse_args()
 
@@ -90,14 +98,27 @@ def remove_task(task_id):
             break
     update_tasks_list_json(tasks_list)
 
+def update_task_status(task_id, status):
+    tasks_list = get_tasks_list()
+    for task in tasks_list:
+        if task['id'] == task_id:
+            task['status'] = status
+            break
+    update_tasks_list_json(tasks_list)
+
 # Check actions
 if action_type in Actions:
     if action_type == 'add':
         add_task(command.description)
     elif action_type == 'update':
         update_task(command.id, command.description)
-    else:
+    elif action_type == 'remove':
         remove_task(command.id)
+    elif action_type == 'mark-done':
+        update_task_status(command.id, 'mark-done')
+    elif action_type == 'mark-in-progress':
+        update_task_status(command.id, 'mark-in-progress')
+
 else:
     print('Enter a valid action: add, update or remove')
 
