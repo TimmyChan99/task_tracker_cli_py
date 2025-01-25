@@ -1,10 +1,27 @@
 import argparse
-import datetime
+from datetime import datetime
+import json
 
-tasks_list = []
 Actions = ['add', 'update', 'remove']
 TASK_STATUS = ['todo', 'in-progress', 'done']
 added_tasks = 0
+
+# File handling
+def get_file_content():
+    try:
+        # Create a JSON file and return empty list
+        open('tasks_list.json', 'x')
+        return []
+    except:
+        # Read existing JSON file and get content
+        tasks_file = open('tasks_list.json', 'r')
+        read_content = tasks_file.read()
+        if read_content:
+            return  json.loads(read_content)
+        else:
+            return []
+
+tasks_list = get_file_content()
 
 # Top level command
 parser = argparse.ArgumentParser()
@@ -24,8 +41,8 @@ parser_update.add_argument('description', type=str, help='Updated task descripti
 parser_update = subparsers.add_parser('remove', help='Remove task')
 parser_update.add_argument('id', type=int, help='Task to remove id')
 
+
 command = parser.parse_args()
-print(command)
 
 action_type = command.actions
 
@@ -35,15 +52,19 @@ def add_task(description):
         'id': added_tasks + 1,
         'description': description,
         'status': 'todo',
-        'createdAt': datetime.datetime.now(),
+        'createdAt': datetime.now().strftime('%d/%m/%Y'),
         'updatedAt': None
     }
     tasks_list.append(task)
+    with open('tasks_list.json', 'w') as json_file:
+        json.dump(tasks_list, json_file, indent=4)
+
 
 def update_task(task_id, description):
     for task in tasks_list:
         if task['id'] == task_id:
             task['description'] = description
+            task['updatedAt'] = datetime.now().strftime('%d/%m/%Y')
             break
 
 def remove_task(task_id):
@@ -62,4 +83,5 @@ if action_type in Actions:
         remove_task(command.id)
 else:
     print('Enter a valid action: add, update or remove')
-print(tasks_list)
+
+# print(tasks_list)

@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "description": "Task 1",
+        "status": "todo",
+        "createdAt": "25/01/2025",
+        "updatedAt": null
+    }
+]
