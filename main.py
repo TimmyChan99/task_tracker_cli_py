@@ -7,7 +7,7 @@ TASK_STATUS = ['todo', 'in-progress', 'done']
 added_tasks = 0
 
 # File handling
-def get_file_content():
+def get_tasks_list():
     try:
         # Create a JSON file and return empty list
         open('tasks_list.json', 'x')
@@ -21,7 +21,16 @@ def get_file_content():
         else:
             return []
 
-tasks_list = get_file_content()
+def update_tasks_list_json(updated_list):
+    if not len(updated_list):
+        print('Your tasks list is empty.')
+        return
+
+    try:
+        with open('tasks_list.json', 'w') as json_file:
+            json.dump(updated_list, json_file, indent=4)
+    except:
+        print('Your tasks list is empty.')
 
 # Top level command
 parser = argparse.ArgumentParser()
@@ -46,32 +55,40 @@ command = parser.parse_args()
 
 action_type = command.actions
 
+def generate_id():
+    tasks_list = get_tasks_list()
+    return len(tasks_list) + 1
+
 # Actions
 def add_task(description):
     task = {
-        'id': added_tasks + 1,
+        'id': generate_id(),
         'description': description,
         'status': 'todo',
         'createdAt': datetime.now().strftime('%d/%m/%Y'),
         'updatedAt': None
     }
+    tasks_list = get_tasks_list()
     tasks_list.append(task)
-    with open('tasks_list.json', 'w') as json_file:
-        json.dump(tasks_list, json_file, indent=4)
+    update_tasks_list_json(tasks_list)
 
 
 def update_task(task_id, description):
+    tasks_list = get_tasks_list()
     for task in tasks_list:
         if task['id'] == task_id:
             task['description'] = description
             task['updatedAt'] = datetime.now().strftime('%d/%m/%Y')
             break
+    update_tasks_list_json(tasks_list)
 
 def remove_task(task_id):
+    tasks_list = get_tasks_list()
     for task in tasks_list:
         if task['id'] == task_id:
             tasks_list.remove(task)
             break
+    update_tasks_list_json(tasks_list)
 
 # Check actions
 if action_type in Actions:
@@ -84,4 +101,4 @@ if action_type in Actions:
 else:
     print('Enter a valid action: add, update or remove')
 
-# print(tasks_list)
+# print('tasks_list')
