@@ -61,13 +61,10 @@ parser_mark_in_progress.add_argument('id', type=int, help='Task to mark as in pr
 
 # List tasks Sub Command
 parser_list_tasks = subparsers.add_parser('list', help='List tasks')
-list_tasks_subparsers = parser_list_tasks.add_subparsers(dest='status')
-parser_list_done_tasks = list_tasks_subparsers.add_parser('done', help='List done tasks')
-parser_list_todo_tasks = list_tasks_subparsers.add_parser('todo', help='List todo tasks')
-parser_list_in_progress_tasks = list_tasks_subparsers.add_parser('in-progress', help='List in progress tasks')
+parser_list_tasks.add_argument("status", type=str, nargs="?", choices=["todo", "done", "in-progress"], help="Task status")
 
+# Parse arguments
 command = parser.parse_args()
-
 action_type = command.actions
 
 def generate_id():
@@ -111,9 +108,6 @@ def update_task_status(task_id, status):
             task['status'] = status
             break
     update_tasks_list_json(tasks_list)
-
-def filter_by_status(task, status):
-    return task['status'] == status
 
 def list_tasks(status):
     tasks_list = get_tasks_list()
