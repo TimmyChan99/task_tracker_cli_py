@@ -137,4 +137,4 @@ if action_type in Actions:
         print(json.dumps(list_tasks(command.status), indent=2))
 
 else:
-    print('Enter a valid action: add, update or remove')
+    print('Enter a valid action: add, update, remove, list, mark-done or mark-in-progress')
