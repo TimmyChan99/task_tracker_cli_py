@@ -28,7 +28,7 @@ The application uses:
 
 1. Ensure you have Python 3.x installed on your machine.
 2. Clone this repository or download the source code.
-3. Navigate to the directory containing the `task_tracker.py` file.
+3. Navigate to the directory containing the `main.py` file.
 4. Run the application from your terminal or command prompt.
 
 ---
@@ -38,59 +38,59 @@ The application uses:
 Run the application with the following command:
 
 ```bash
-python# task_tracker.py <action> [options]
+python3 task-cli main.py <action> [options]
 ```
 
 ### Available Actions
 
 #### 1. Add a New Task
 ```bash
-python3 task_tracker.py add "Task description"
+python3 task-cli main.py add "Task description"
 ```
 - Example:
   ```bash
-  python3 task_tracker.py add "Buy groceries"
+  python3 task-cli main.py add "Buy groceries"
   ```
 
 #### 2. Update a Task
 ```bash
-python3 task_tracker.py update <task_id> "Updated description"
+python3 task-cli main.py update <task_id> "Updated description"
 ```
 - Example:
   ```bash
-  python3 task_tracker.py update 1 "Buy groceries and cook dinner"
+  python3 task-cli main.py update 1 "Buy groceries and cook dinner"
   ```
 
 #### 3. Remove a Task
 ```bash
-python3 task_tracker.py remove <task_id>
+python3 task-cli main.py remove <task_id>
 ```
 - Example:
   ```bash
-  python3 task_tracker.py remove 1
+  python3 task-cli main.py remove 1
   ```
 
 #### 4. Mark a Task as Done
 ```bash
-python3 task_tracker.py mark-done <task_id>
+python3 task-cli main.py mark-done <task_id>
 ```
 - Example:
   ```bash
-  python3 task_tracker.py mark-done 2
+  python3 task-cli main.py mark-done 2
   ```
 
 #### 5. Mark a Task as In-Progress
 ```bash
-python3 task_tracker.py mark-in-progress <task_id>
+python3 task-cli main.py mark-in-progress <task_id>
 ```
 - Example:
   ```bash
-  python3 task_tracker.py mark-in-progress 3
+  python3 task-cli main.py mark-in-progress 3
   ```
 
 #### 6. List Tasks
 ```bash
-python3 task_tracker.py list [status]
+python3 task-cli main.py list [status]
 ```
 - **Status Options:**
   - `todo`: List tasks that are not started.
@@ -99,8 +99,8 @@ python3 task_tracker.py list [status]
 
 - Examples:
   ```bash
-  python3 task_tracker.py list
-  python3 task_tracker.py list done
+  python3 task-cli main.py list
+  python3 task-cli main.py list done
   ```
 
 ---
