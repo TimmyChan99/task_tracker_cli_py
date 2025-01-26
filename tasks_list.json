@@ -2,7 +2,7 @@
     {
         "id": 1,
         "description": "Task 1",
-        "status": "mark-in-progress",
+        "status": "in-progress",
         "createdAt": "25/01/2025",
         "updatedAt": null
     },
@@ -16,7 +16,7 @@
     {
         "id": 3,
         "description": "Task 3",
-        "status": "mark-done",
+        "status": "done",
         "createdAt": "25/01/2025",
         "updatedAt": null
     },
@@ -25,6 +25,20 @@
         "description": "Task 4",
         "status": "todo",
         "createdAt": "25/01/2025",
+        "updatedAt": null
+    },
+    {
+        "id": 5,
+        "description": "Task 5",
+        "status": "todo",
+        "createdAt": "26/01/2025",
+        "updatedAt": null
+    },
+    {
+        "id": 6,
+        "description": "Task 6",
+        "status": "todo",
+        "createdAt": "26/01/2025",
         "updatedAt": null
     }
 ]
